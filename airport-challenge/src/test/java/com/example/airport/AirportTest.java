@@ -100,6 +100,9 @@ class AirportTest {
 
     @Test
     void planeNotAtAirportCannotTakeOff(){
-        
+        var ex=assertThrows(IllegalStateException.class,
+                () -> airport.takeOff(plane));
+        assertEquals("Cannot take off: plane is not at this airport", ex.getMessage());
+
     }
 }

@@ -43,6 +43,9 @@ public class Airport {
         if (weather.isStormy()) {
             throw new IllegalStateException("Cannot take off: stormy weather");
         }
+        if (!hasPlane(plane)){
+            throw new IllegalStateException("Cannot take off: plane is not at this airport");
+        }
         planes.remove(plane);
     }
 
