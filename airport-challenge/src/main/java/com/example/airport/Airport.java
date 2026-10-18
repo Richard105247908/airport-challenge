@@ -11,7 +11,7 @@ public class Airport {
         planes[num++]=plane;
     }
 
-    //Create a for loop to identify if plane has been added to array
+    //Create a for loop to identify if plane has been added to array.
     public boolean hasPlane(Plane plane) {
         for (int i = 0; i < planes.length; i++) {
             if (planes[i]==plane){
