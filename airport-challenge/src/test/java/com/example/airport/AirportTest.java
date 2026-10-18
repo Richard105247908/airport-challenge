@@ -88,4 +88,7 @@ class AirportTest {
 
         assertEquals("Cannot land: stormy weather", ex.getMessage());
     }
+    @Test void planeAlreadyLandedCannotLandAgain() {
+        
+    }
 }
