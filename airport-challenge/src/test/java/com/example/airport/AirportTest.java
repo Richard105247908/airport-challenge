@@ -93,5 +93,7 @@ class AirportTest {
 
         var ex = assertThrows(IllegalStateException.class,
                 () -> airport.land(plane));
+
+        assertEquals("Cannot land: plane is already at the airport", ex.getMessage());
     }
 }
