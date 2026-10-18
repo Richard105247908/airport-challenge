@@ -90,5 +90,8 @@ class AirportTest {
     }
     @Test void planeAlreadyLandedCannotLandAgain() {
         airport.land(plane);
+
+        var ex = assertThrows(IllegalStateException.class,
+                () -> airport.land(plane));
     }
 }
