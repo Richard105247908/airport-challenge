@@ -98,5 +98,8 @@ class AirportTest {
         assertEquals("Cannot land: plane is already at the airport", ex.getMessage());
     }
 
-    @
+    @Test
+    void planeNotAtAirportCannotTakeOff(){
+        
+    }
 }
