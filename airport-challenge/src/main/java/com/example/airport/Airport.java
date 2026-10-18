@@ -25,6 +25,9 @@ public class Airport {
         if (planes.size() >= capacity) {
             throw new IllegalStateException("Cannot land: airport is full");
         }
+        if (weather.isStormy()){
+            throw new IllegalStateException("Cannot take off: stormy weather");
+        }
         planes.add(plane);
     }
 
