@@ -1,22 +1,27 @@
 package com.example.airport;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class AirportTest {
 
+
+    @Mock Weather weather;
     Airport airport;
     Plane plane;
 
     @BeforeEach
     void setUp() {
-        airport = new Airport();
+        airport = new Airport(weather);
         plane = new Plane();
+
     }
 
     @Test
@@ -44,7 +49,7 @@ class AirportTest {
 
     @Test
     void fullAirportRejectsLanding() {
-        Airport smallAirport = new Airport(1);
+        Airport smallAirport = new Airport(weather,1);
         smallAirport.land(plane);
 
         var ex = assertThrows(IllegalStateException.class,
@@ -63,8 +68,6 @@ class AirportTest {
                 () -> airport.land(new Plane()));
     }
 
-    @Mock
-    Weather weather;
 
     @Test
     void stormyWeatherBlocksTakeOff() {

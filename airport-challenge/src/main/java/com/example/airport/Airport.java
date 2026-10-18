@@ -9,12 +9,15 @@ public class Airport {
 
     private final List<Plane> planes = new ArrayList<>();
     private final int capacity;
+    private final Weather weather;
 
-    public Airport() {
-        this(DEFAULT_CAPACITY);
+
+    public Airport(Weather weather) {
+        this(weather, DEFAULT_CAPACITY);
     }
 
-    public Airport(int capacity) {
+    public Airport(Weather weather, int capacity) {
+        this.weather = weather;
         this.capacity = capacity;
     }
 
@@ -31,6 +34,9 @@ public class Airport {
 
     public void takeOff(Plane plane) {
 
+        if (weather.isStormy()) {
+            throw new IllegalStateException("Cannot take off: stormy weather");
+        }
         planes.remove(plane);
     }
 
