@@ -3,8 +3,10 @@ package com.example.airport;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class AirportTest {
 
@@ -59,5 +61,19 @@ class AirportTest {
 
         assertThrows(IllegalStateException.class,
                 () -> airport.land(new Plane()));
+    }
+
+    @Mock
+    Weather weather;
+
+    @Test
+    void stormyWeatherBlocksTakeOff() {
+        airport.land(plane);
+        when(weather.isStormy()).thenReturn(true);
+
+        var ex = assertThrows(IllegalStateException.class,
+                () -> airport.takeOff(plane));
+
+        assertEquals("Cannot take off: stormy weather", ex.getMessage());
     }
 }
