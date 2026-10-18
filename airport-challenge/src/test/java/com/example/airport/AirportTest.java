@@ -79,4 +79,13 @@ class AirportTest {
 
         assertEquals("Cannot take off: stormy weather", ex.getMessage());
     }
+    @Test
+    void stormyWeatherBlocksLanding() {
+        when(weather.isStormy()).thenReturn(true);
+
+        var ex = assertThrows(IllegalStateException.class,
+                () -> airport.land(plane));
+
+        assertEquals("Cannot land: stormy weather", ex.getMessage());
+    }
 }
