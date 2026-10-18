@@ -28,7 +28,7 @@ public class Airport {
         if (weather.isStormy()){
             throw new IllegalStateException("Cannot land: stormy weather");
         }
-        if (planes.contains(plane)){
+        if (hasPlane(plane)){
             throw new IllegalStateException("Cannot land: plane is already at the airport");
         }
         planes.add(plane);
