@@ -11,11 +11,11 @@ class AirportTest {
     Airport airport;
     Plane plane;
 
-   @BeforeEach
-   void setUp(){
-       airport = new Airport();
-       plane=new Plane();
-   }
+    @BeforeEach
+    void setUp() {
+        airport = new Airport();
+        plane = new Plane();
+    }
 
     @Test
     void landedPlaneIsInAirport() {
@@ -26,13 +26,13 @@ class AirportTest {
     }
 
     @Test
-    void unlandedPlaneIsNotInAirport(){
+    void unlandedPlaneIsNotInAirport() {
 
         assertFalse(airport.hasPlane(plane));
     }
 
     @Test
-    void takenOffPlaneIsNoLongerInAirport(){
+    void takenOffPlaneIsNoLongerInAirport() {
 
         airport.land(plane);
         airport.takeOff(plane);
@@ -49,5 +49,15 @@ class AirportTest {
                 () -> smallAirport.land(new Plane()));
 
         assertEquals("Cannot land: airport is full", ex.getMessage());
+    }
+
+    @Test
+    void airportWithNoCapacityGivenUsesDefault() {
+                for (int i = 0; i < Airport.DEFAULT_CAPACITY; i++) {
+            airport.land(new Plane());
+        }
+
+        assertThrows(IllegalStateException.class,
+                () -> airport.land(new Plane()));
     }
 }
