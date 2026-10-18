@@ -8,6 +8,9 @@ public class Airport {
     }
 
     public boolean hasPlane(Plane plane) {
+        if(plane!=null){
+            return true;
+        }
         return false;
     }
 }
