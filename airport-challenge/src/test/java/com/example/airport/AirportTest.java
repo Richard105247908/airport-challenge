@@ -1,11 +1,10 @@
 package com.example.airport;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class AirportTest {
 
@@ -39,5 +38,16 @@ class AirportTest {
         airport.takeOff(plane);
 
         assertFalse(airport.hasPlane(plane));
+    }
+
+    @Test
+    void fullAirportRejectsLanding() {
+        Airport smallAirport = new Airport(1);
+        smallAirport.land(plane);
+
+        var ex = assertThrows(IllegalStateException.class,
+                () -> smallAirport.land(new Plane()));
+
+        assertEquals("Cannot land: airport is full", ex.getMessage());
     }
 }
