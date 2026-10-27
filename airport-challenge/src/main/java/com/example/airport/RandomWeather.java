@@ -10,4 +10,10 @@ public class RandomWeather {
     public RandomWeather(Random random) {
         this.random = random;
     }
+    public RandomWeather(){
+        this(new Random());
+    }
+    int isStormy(){
+        return random.nextInt(STORM_ODDS)==0;
+    }
 }
