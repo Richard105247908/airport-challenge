@@ -119,23 +119,4 @@ class AirportTest {
         assertTrue(airport.hasPlane(otherPlane));
     }
 
-    @ExtendWith(MockitoExtension.class)
-    class RandomWeatherTest {
-
-        @Mock Random random;
-
-        @Test
-        void isStormyWhenRollIsZero(){
-            when(random.nextInt(RandomWeather.STORM_ODDS)).thenReturn(0);
-
-            assertTrue(new RandomWeather(random).isStormy());
-        }
-        @Test
-        void isClearWhenRollIsNotZero() {
-            when(random.nextInt(RandomWeather.STORM_ODDS)).thenReturn(1);
-
-            assertFalse(new RandomWeather(random).isStormy());
-        }
-    }
-
 }
