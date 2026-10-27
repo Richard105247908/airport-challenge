@@ -1,32 +1,30 @@
 package com.example.airport;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
 class RandomWeatherTest {
 
-    @Mock
-    Random random;
+    private static Random alwaysRolls(int value) {
+        return new Random() {
+            @Override
+            public int nextInt(int bound) {
+                return value;
+            }
+        };
+    }
 
     @Test
-    void isStormyWhenRollIsZero(){
-        when(random.nextInt(RandomWeather.STORM_ODDS)).thenReturn(0);
-
-        assertTrue(new RandomWeather(random).isStormy());
+    void isStormyWhenRollIsZero() {
+        assertTrue(new RandomWeather(alwaysRolls(0)).isStormy());
     }
+
     @Test
     void isClearWhenRollIsNotZero() {
-        when(random.nextInt(RandomWeather.STORM_ODDS)).thenReturn(1);
-
-        assertFalse(new RandomWeather(random).isStormy());
+        assertFalse(new RandomWeather(alwaysRolls(1)).isStormy());
     }
 }
