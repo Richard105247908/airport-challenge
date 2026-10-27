@@ -126,7 +126,7 @@ class AirportTest {
 
         @Test
         void isStormyWhenRollIsZero(){
-            when(random.nextInt(RandomWeather.STORM_ODD)).thenReturn(0);
+            when(random.nextInt(RandomWeather.STORM_ODDS)).thenReturn(0);
 
             assertTrue(new RandomWeather(random).isStormy());
         }

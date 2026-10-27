@@ -13,6 +13,8 @@ public class RandomWeather implements Weather{
     public RandomWeather(){
         this(new Random());
     }
+    
+    @Override
     public boolean isStormy(){
         return random.nextInt(STORM_ODDS)==0;
     }
