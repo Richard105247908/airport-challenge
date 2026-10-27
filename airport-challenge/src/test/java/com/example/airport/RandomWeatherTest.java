@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RandomWeatherTest {
 
+    //changes made
     private static Random alwaysRolls(int value) {
         return new Random() {
             @Override
