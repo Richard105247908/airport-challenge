@@ -105,4 +105,21 @@ class AirportTest {
         assertEquals("Cannot take off: plane is not at this airport", ex.getMessage());
 
     }
+
+    @Test
+    void takeOffLeavesOtherPlanesAtAirport(){
+        Plane otherPlane = new Plane();
+        airport.land(plane);
+        airport.land(otherPlane);
+
+        airport.takeOff(plane);
+
+        assertTrue(airport.hasPlane(otherPlane));
+    }
+
+    @ExtendWith(MockitoExtension.class)
+    class RandomWeatherTest {
+        
+    }
+
 }
