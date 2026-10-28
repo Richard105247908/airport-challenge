@@ -2,8 +2,7 @@ package com.example.airport;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AirportFeatureTest {
 
@@ -23,6 +22,7 @@ public class AirportFeatureTest {
         airport.takeOff(second);
 
         assertTrue(airport.hasPlane(first));
+        assertFalse(airport.hasPlane(second));
         
 
 
