@@ -3,6 +3,7 @@ package com.example.airport;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AirportFeatureTest {
 
@@ -18,6 +19,11 @@ public class AirportFeatureTest {
         airport.land(second);
         airport.land(third);
         assertThrows(IllegalStateException.class, () -> airport.land(new Plane()));
+
+        airport.takeOff(second);
+
+        assertTrue(airport.hasPlane(first));
+        
 
 
     }
