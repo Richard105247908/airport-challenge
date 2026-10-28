@@ -12,6 +12,10 @@ public class AirportFeatureTest {
         Plane second = new Plane();
         Plane third = new Plane();
 
-        
+        airport.land(first);
+        airport.land(second);
+        airport.land(third);
+
+
     }
 }
