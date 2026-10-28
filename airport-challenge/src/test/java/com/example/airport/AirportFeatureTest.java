@@ -23,7 +23,8 @@ public class AirportFeatureTest {
 
         assertTrue(airport.hasPlane(first));
         assertFalse(airport.hasPlane(second));
-        
+        assertTrue(airport.hasPlane(third));
+        assertDoesNotThrow(() -> airport.land(new Plane()));
 
 
     }
