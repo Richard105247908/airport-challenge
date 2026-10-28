@@ -59,15 +59,15 @@ I want to prevent landing when weather is stormy
 ```
 
 ## Progress (update as you go)
-- [ ] Land a plane
-- [ ] Take off and confirm it has left
-- [ ] Full airport blocks landing
-- [ ] Default capacity, overridable
-- [ ] Stormy weather blocks take-off
-- [ ] Stormy weather blocks landing
-- [ ] Edge cases
-- [ ] Coverage above 95%
-- [ ] Bonus: feature test landing and taking off several planes
+- [x] Land a plane
+- [x] Take off and confirm it has left
+- [x] Full airport blocks landing
+- [x] Default capacity, overridable
+- [x] Stormy weather blocks take-off
+- [x] Stormy weather blocks landing
+- [x] Edge cases
+- [x] Coverage above 95%
+- [x] Bonus: feature test landing and taking off several planes
 
 ## Architecture notes
 _Fill in as you build: why the classes are split the way they are, and how weather is injected._
