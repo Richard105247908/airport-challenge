@@ -2,6 +2,8 @@ package com.example.airport;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class AirportFeatureTest {
 
     @Test
@@ -15,6 +17,7 @@ public class AirportFeatureTest {
         airport.land(first);
         airport.land(second);
         airport.land(third);
+        assertThrows(IllegalStateException.class, () -> airport.land(new Plane()));
 
 
     }
