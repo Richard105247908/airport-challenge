@@ -1,5 +1,5 @@
 # Airport Challenge (Java)
-
+![CI](https://github.com/Richard105247908/airport-challenge/actions/workflows/ci.yml/badge.svg)
 A Java 21 / JUnit 5 / Mockito port of the Makers [airport_challenge](https://github.com/makersacademy/airport_challenge), built test-first.
 
 ## Stack
