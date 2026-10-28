@@ -7,8 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,5 +27,9 @@ class RandomWeatherTest {
         when(random.nextInt(RandomWeather.STORM_ODDS)).thenReturn(1);
 
         assertFalse(new RandomWeather(random).isStormy());
+    }
+    @Test
+    void defaultConstructorWorks() {
+        assertDoesNotThrow(() -> new RandomWeather().isStormy());
     }
 }
