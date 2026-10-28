@@ -37,14 +37,6 @@ To ensure safety
 I want to prevent landing when weather is stormy
 ```
 
-## Java translation notes
-| Ruby / RSpec | Java |
-|---|---|
-| `double` for random weather | Mockito mock (or a hand-written stub) of a `Weather` interface |
-| `rand` for weather | `Random` inside a `RandomWeather` implementation |
-| Default capacity, overridable | Two constructors, or a constant plus an overload |
-| `raise` | Throw `IllegalStateException`; test with `assertThrows` |
-| SimpleCov | JaCoCo |
 
 ## Edge cases to cover
 - A plane that is already flying cannot take off again
@@ -69,5 +61,53 @@ I want to prevent landing when weather is stormy
 - [x] Coverage above 95%
 - [x] Bonus: feature test landing and taking off several planes
 
+## Usage
+
+An airport needs a weather source. Use `RandomWeather` for the real thing
+(about a 1 in 4 chance of a storm), or any other `Weather`.
+
+```java
+Weather weather = new RandomWeather();
+Airport airport = new Airport(weather);          // default capacity of 5
+Airport bigAirport = new Airport(weather, 10);   // custom capacity
+```
+
+**Land a plane** with `airport.land(plane);`. It checks, in this order, and throws
+`IllegalStateException` if one fails:
+1. The airport is full: "Cannot land: airport is full"
+2. The weather is stormy: "Cannot land: stormy weather"
+3. The plane is already here: "Cannot land: plane is already at the airport"
+
+If all three checks pass, the plane is added to the airport.
+
+**Take off** with `airport.takeOff(plane);`. It checks, in this order:
+1. The weather is stormy: "Cannot take off: stormy weather"
+2. The plane isn't at this airport: "Cannot take off: plane is not at this airport"
+
+If both pass, the plane is removed from the airport. In a storm, try again once the weather clears.
+
+**Check a plane** with `airport.hasPlane(plane);`, which returns `true` if it is at this airport.
+
+Because `RandomWeather` is random, landing or taking off can throw a stormy-weather
+exception even when everything else is fine.
+
 ## Architecture notes
-_Fill in as you build: why the classes are split the way they are, and how weather is injected._
+
+**Classes**
+- `Airport` holds the planes that have landed, and decides whether a landing or take-off is allowed. It does not decide the weather.
+- `Weather` is an interface injected through the `Airport` constructor, so tests can control it. `RandomWeather` is the real one and has a `Random` injected for the same reason.
+- `Plane` has no state of its own. Whether a plane is at an airport is answered by `airport.hasPlane(plane)`.
+
+**Rules**
+- Capacity has a default of 5 (a constant) and can be overridden through an overload.
+- A landing is refused if the airport is at capacity, the weather is stormy, or the plane is already there.
+- A take-off is refused if the weather is stormy or the plane is not at this airport.
+- Each violation throws `IllegalStateException` with a clear message, and the tests check the message as well as the type.
+
+**Testing**
+- JUnit 5 for the tests, Mockito to mock `Weather` and `Random`.
+- Mockito could not mock `Random` on Java 25, so the project uses Java 21, matching `pom.xml` and CI.
+
+**What I would do next**
+- Give `Plane` its own state (flying or landed), so the plane also confirms what has happened to it.
+- Replace `IllegalStateException` with specific exception types.

@@ -13,6 +13,7 @@ public class Airport {
 
 
     public Airport(Weather weather) {
+
         this(weather, DEFAULT_CAPACITY);
     }
 
